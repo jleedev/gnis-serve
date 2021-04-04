@@ -3,7 +3,7 @@ FROM debian:bullseye-slim AS builder
 RUN apt-get update && \
 	apt-get -y --no-install-recommends install \
 		curl ca-certificates gdal-bin python3 && \
-	apt-get clean
+	rm -rf /var/lib/apt/lists/*
 
 WORKDIR /build/
 RUN curl -Of https://geonames.usgs.gov/docs/stategaz/NationalFile.zip
