@@ -1,0 +1,21 @@
+[[providers]]
+name = "NationalFile"
+type = "gpkg"
+filepath = "/data/NationalFile.gpkg"
+
+[[providers.layers]]
+name = "NationalFile"
+sql = """
+    SELECT *
+    FROM NationalFile
+    JOIN rtree_NationalFile_geom si ON NationalFile.fid = si.id
+    WHERE !BBOX!
+    LIMIT 100
+"""
+
+[[maps]]
+name = "gnis"
+center = [-80.0, 40.44, 16.0]
+
+[[maps.layers]]
+provider_layer = "NationalFile.NationalFile"
