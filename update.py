@@ -17,12 +17,20 @@ def geojson(long, lat, properties):
         "properties": properties,
         }
 
+config_toml_template = Path('config.toml.template')
+config_toml = Path('config.toml')
+
 def open_csv():
     zip_path = Path('NationalFile.zip')
     logging.debug('%s', zip_path)
     z = zipfile.ZipFile('NationalFile.zip')
     entry = z.filelist[0]
     logging.debug('%s', entry.filename)
+    run_id = Path(entry.filename).stem
+
+    config_toml.write_text(
+            config_toml_template.read_text().format(attribution=run_id))
+
     b = z.open(entry)
     f = io.TextIOWrapper(b, encoding='utf-8-sig')
     return f

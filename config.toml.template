@@ -16,6 +16,7 @@ sql = """
 [[maps]]
 name = "gnis"
 center = [-80.0, 40.44, 16.0]
+attribution = "GNIS {attribution}"
 
 [[maps.layers]]
 provider_layer = "NationalFile.NationalFile"
